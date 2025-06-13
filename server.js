@@ -34,6 +34,7 @@ let products = [
     category: 'electronics',
     inStock: true
   },
+
   {
     id: '2',
     name: 'Smartphone',
@@ -42,6 +43,7 @@ let products = [
     category: 'electronics',
     inStock: true
   },
+
   {
     id: '3',
     name: 'Coffee Maker',
@@ -126,7 +128,7 @@ app.post('/api/products', auth, validateProduct, (req, res, next) => {
   }
 
   const newProduct = {
-    id: uuidv4(),
+    id: req.body.id || uuidv4(),
     name,
     description,
     price,

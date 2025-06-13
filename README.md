@@ -1,52 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19771536&assignment_repo_type=AssignmentRepo)
-# Express.js RESTful API Assignment
-
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
-
-## Assignment Overview
-
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
-
-## Getting Started
-
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
-
-## Files Included
-
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
-
-## Requirements
-
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
-
-## API Endpoints
-
-The API will have the following endpoints:
-
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
-
 ## Submission
 
 Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
@@ -56,8 +7,206 @@ Your work will be automatically submitted when you push to your GitHub Classroom
 3. Document your API in the README.md
 4. Include examples of requests and responses
 
-## Resources
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+
+#  Product API - Express.js
+
+This is a simple RESTful API built with Express.js that allows users to manage a list of products with authentication and error handling.
+
+---
+
+## 🚀 Instructions to Run the Server
+
+1. **Clone the repository:**
+
+   git clone https://github.com/PLP-MERN-Stack-Development/week-2-express-js-assignment-Winnchester-25.git
+
+   cd express-app
+   ```
+
+2. **Install dependencies:**
+
+   
+   npm install
+   
+
+3. **Start the server:**
+
+   - For development (auto-restarts on file change):
+
+     npm run dev
+     
+
+4. **Access the server:**
+
+   The API will be available at:
+
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## API Documentation
+
+Base URL: `http://localhost:3000/api/products`
+
+###  Authentication
+
+All endpoints (except `GET`) require an API key in the header:
+
+```
+x-api-key: your-secret-api-key
+```
+
+---
+
+### 📖 Endpoints
+
+#### ✅ GET `/api/products`
+
+**Description:** Returns a list of all products.
+
+**Response:**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Laptop",
+    "description": "High-performance laptop with 16GB RAM",
+    "price": 1200,
+    "category": "electronics",
+    "inStock": true
+  }
+]
+```
+
+---
+
+#### ✅ GET `/api/products/:id`
+
+**Description:** Returns a single product by ID.
+
+**Response:**
+
+```json
+{
+  "id": "1",
+  "name": "Laptop",
+  "description": "High-performance laptop with 16GB RAM",
+  "price": 1200,
+  "category": "electronics",
+  "inStock": true
+}
+```
+
+---
+
+#### ✅ POST `/api/products`
+
+**Description:** Adds a new product.
+
+**Headers:**
+
+```
+x-api-key: your-secret-api-key
+Content-Type: application/json
+```
+
+**Request Body:**
+
+```json
+{
+  "name": "Headphones",
+  "description": "Noise-cancelling headphones",
+  "price": 150,
+  "category": "electronics",
+  "inStock": true
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": "generated-id",
+  "name": "Headphones",
+  "description": "Noise-cancelling headphones",
+  "price": 150,
+  "category": "electronics",
+  "inStock": true
+}
+```
+
+---
+
+#### ✅ PUT `/api/products/:id`
+
+**Description:** Updates an existing product.
+
+**Request Body:** *(same format as POST)*
+
+**Response:**
+
+```json
+{
+  
+  "name": "Updated Laptop",
+  "description": "Updated description",
+  "price": 1300,
+  "category": "electronics",
+  "inStock": false
+}
+```
+
+---
+
+#### ✅ DELETE `/api/products/:id`
+
+**Description:** Deletes a product by ID.
+
+**Response:**
+
+```json
+{
+  "message": "Product deleted",
+  "product": {
+    "id": "1",
+    "name": "Laptop",
+    "description": "High-performance laptop with 16GB RAM",
+    "price": 1200,
+    "category": "electronics",
+    "inStock": true
+  }
+}
+```
+
+---
+
+##  Error Handling
+
+The API uses custom error classes for structured error messages:
+
+- `ValidationError` – for bad input
+- `NotFoundError` – when a product is not found
+- Authentication failure returns a 401 Unauthorized error
+
+---
+
+##  Project Structure
+
+```
+project-folder/
+├── middleware/
+│   ├── auth.js
+│   ├── logger.js
+│   └── validateProduct.js
+├── errors/
+│   ├── ValidationError.js
+│   └── NotFoundError.js
+├── server.js
+└── README.md
+```
+
+---
